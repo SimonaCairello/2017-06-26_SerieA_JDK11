@@ -2,18 +2,16 @@ package it.polito.tdp.seriea.model;
 
 import java.time.LocalDate;
 
-public class Match {
+public class Match implements Comparable<Match>{
 
 	private int id;
 	private Season season;
-	private String div;
 	private LocalDate date;
-	private Team homeTeam;
-	private Team awayTeam;
-	private int fthg; // full time home goals
-	private int ftag; // full time away goals
-	private String ftr; // full time result (H, A, D)
-	// E' possibile aggiungere altri campi, se risulteranno necessari
+	private String homeTeam;
+	private String awayTeam;
+	private int fthg;
+	private int ftag;
+	private String ftr;
 
 	/**
 	 * New match
@@ -28,11 +26,9 @@ public class Match {
 	 * @param ftag
 	 * @param ftr
 	 */
-	public Match(int id, Season season, String div, LocalDate date, Team homeTeam, Team awayTeam, int fthg, int ftag, String ftr) {
-		super();
+	public Match(int id, Season season, LocalDate date, String homeTeam, String awayTeam, int fthg, int ftag, String ftr) {
 		this.id = id;
 		this.season = season;
-		this.div = div;
 		this.date = date;
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
@@ -56,13 +52,6 @@ public class Match {
 	}
 
 	/**
-	 * @return the div
-	 */
-	public String getDiv() {
-		return div;
-	}
-
-	/**
 	 * @return the date
 	 */
 	public LocalDate getDate() {
@@ -72,14 +61,14 @@ public class Match {
 	/**
 	 * @return the homeTeam
 	 */
-	public Team getHomeTeam() {
+	public String getHomeTeam() {
 		return homeTeam;
 	}
 
 	/**
 	 * @return the awayTeam
 	 */
-	public Team getAwayTeam() {
+	public String getAwayTeam() {
 		return awayTeam;
 	}
 
@@ -121,14 +110,6 @@ public class Match {
 	}
 
 	/**
-	 * @param div
-	 * the div to set
-	 */
-	public void setDiv(String div) {
-		this.div = div;
-	}
-
-	/**
 	 * @param date
 	 * the date to set
 	 */
@@ -140,7 +121,7 @@ public class Match {
 	 * @param homeTeam
 	 * the homeTeam to set
 	 */
-	public void setHomeTeam(Team homeTeam) {
+	public void setHomeTeam(String homeTeam) {
 		this.homeTeam = homeTeam;
 	}
 
@@ -148,7 +129,7 @@ public class Match {
 	 * @param awayTeam
 	 * the awayTeam to set
 	 */
-	public void setAwayTeam(Team awayTeam) {
+	public void setAwayTeam(String awayTeam) {
 		this.awayTeam = awayTeam;
 	}
 
@@ -206,6 +187,17 @@ public class Match {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Match [id=" + id + ", season=" + season + ", date=" + date + ", homeTeam=" + homeTeam + ", awayTeam="
+				+ awayTeam + ", fthg=" + fthg + ", ftag=" + ftag + ", ftr=" + ftr + "]";
+	}
+
+	@Override
+	public int compareTo(Match o) {
+		return this.date.compareTo(o.getDate());
 	}
 
 }
